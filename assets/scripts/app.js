@@ -2,9 +2,14 @@ const defaultResult = 0;
 
 let currentResult = defaultResult;
 
-currentResult += 10 * 3;
+function add() {
+    const prevResult = currentResult;
+    const input = Number(userInput.value);
 
-let calculationDescription = `${currentResult}`;
-let errorMessage = 'An error \n occurred!';
+    if (!isNaN(input)) {
+        currentResult += input;
+        outputResult(currentResult, `${prevResult} + ${input}`);
+    }
+}
 
-outputResult(currentResult, errorMessage);
+addBtn.addEventListener('click', add);
