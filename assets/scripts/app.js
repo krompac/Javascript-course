@@ -2,14 +2,38 @@ const defaultResult = 0;
 
 let currentResult = defaultResult;
 
-function add() {
-    const prevResult = currentResult;
-    const input = Number(userInput.value);
-
-    if (!isNaN(input)) {
-        currentResult += input;
-        outputResult(currentResult, `${prevResult} + ${input}`);
-    }
+function getUserNumberInput() {
+    const input = parseInt(userInput.value);
+    return isNaN(input) ? 0 : input;
 }
 
-addBtn.addEventListener('click', add);
+function operation(operationType) {
+    const prevResult = currentResult;
+    const input = getUserNumberInput();
+
+    switch (operationType) {
+        case '+':
+            currentResult += input;        
+            break;
+        case '-':
+            currentResult -= input;
+            break;
+        case '*':
+            currentResult *= input;
+            break;
+        case '/':
+            if (input !== 0) {
+                currentResult /= input;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    outputResult(currentResult, `${prevResult} ${operationType} ${input}`);
+}
+
+addBtn.addEventListener('click', () => operation('+'));
+subtractBtn.addEventListener('click', () => operation('-'));
+multiplyBtn.addEventListener('click', () => operation('*'));
+divideBtn.addEventListener('click', () => operation('/'));
